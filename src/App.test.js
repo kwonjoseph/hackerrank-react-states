@@ -30,6 +30,9 @@ describe("when rendering the App component", () => {
     const vanilla = getByText("vanilla");
     expect(vanilla).not.toBeFalsy();
   })
+  test("App.js will export an IceCream component",()=>{
+    expect(IceCream).not.toBeFalsy();
+  })
 });
 
 /**
