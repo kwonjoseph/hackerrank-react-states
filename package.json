@@ -12,7 +12,7 @@
     },
     "scripts": {
         "start": "cross-env HOST=0.0.0.0 PORT=8000 ./node_modules/.bin/react-scripts start",
-        "pretest": "npm install",
+        "pretest": "",
         "test": "npx check-engines && rm -rf junit.xml && react-scripts test --verbose --env=jsdom --testResultsProcessor ./node_modules/jest-junit",
         "test:watch": "react-scripts test --watch --env=jsdom"
     },
