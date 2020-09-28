@@ -1,7 +1,7 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import App, { IceCream } from "./App";
+import App from "./App";
 
 /**************************************************************************************************
  * Volunteers: add your tests here. They should be failing, but the students should be able to make
@@ -10,28 +10,20 @@ import App, { IceCream } from "./App";
 
 
 describe("when rendering the App component", () => {
-  test("IceCream can render a flavor prop",()=>{
-    const { getByText } = render(<IceCream flavor='foo' />);
-    const textElement = getByText('foo');
-    expect(textElement).toBeInTheDocument();
+  test("morpher clicked the first time should change the diamond into a circle",()=>{
+    const container = render(<App />);
+    const textElement = container.getByText('morpher');
+    fireEvent.click(textElement)
+    const diamond = container.getByTestId('object')
+    expect(diamond.style.borderRadius).toEqual('50%');
   })
-  test("App will have strawberry IceCream component",()=>{
-    const { getByText } = render(<App />)
-    const strawberry = getByText("strawberry");
-    expect(strawberry).not.toBeFalsy();
-  })
-  test("App will have chocolate IceCream component",()=>{
-    const { getByText } = render(<App />)
-    const chocolate = getByText("chocolate");
-    expect(chocolate).not.toBeFalsy();
-  })
-  test("App will have vanilla IceCream component",()=>{
-    const { getByText } = render(<App />)
-    const vanilla = getByText("vanilla");
-    expect(vanilla).not.toBeFalsy();
-  })
-  test("App.js will export an IceCream component",()=>{
-    expect(IceCream).not.toBeFalsy();
+  test("morpher clicked the second time should change the circle back into a diamond",()=>{
+    const container = render(<App />);
+    const textElement = container.getByText('morpher');
+    fireEvent.click(textElement)
+    fireEvent.click(textElement)
+    const circle = container.getByTestId('object')
+    expect(circle.style.borderRadius).toEqual('0%');
   })
 });
 
